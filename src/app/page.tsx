@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createTask, getTasks, updateTaskStatus } from "@/api/tasks";
 import type { Task, TaskStatus } from "@/types";
 
@@ -14,11 +14,21 @@ export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [movingTaskIds, setMovingTaskIds] = useState<Set<string>>(new Set());
   const [moveError, setMoveError] = useState("");
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [createError, setCreateError] = useState("");
   const [isCreating, setIsCreating] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchInput.trim().toLowerCase());
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchInput]);
 
   useEffect(() => {
     let cancelled = false;
@@ -165,9 +175,8 @@ export default function Home() {
           type="text"
           id="search-input"
           placeholder="Filter by title..."
-          onChange={(e) => {
-            console.log("Search query:", e.target.value);
-          }}
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
         />
       </section>
 
@@ -180,7 +189,9 @@ export default function Home() {
       <section className="board-columns" aria-label="Kanban board">
         {columns.map((column) => {
           const columnTasks = tasks.filter(
-            (task) => task.status === column.status,
+            (task) =>
+              task.status === column.status &&
+              task.title.toLowerCase().includes(debouncedSearch),
           );
 
           return (
@@ -242,7 +253,9 @@ export default function Home() {
 
               <div className="task-list">
                 {columnTasks.length === 0 ? (
-                  <p className="empty-column">No tasks yet</p>
+                  <p className="empty-column">
+                    {debouncedSearch ? "No matching tasks" : "No tasks yet"}
+                  </p>
                 ) : (
                   columnTasks.map((task) => (
                     <article key={task.id} className="task-card">
