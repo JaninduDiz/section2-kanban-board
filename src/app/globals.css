@@ -35,3 +35,230 @@ h2,
 h3 {
   overflow-wrap: break-word;
 }
+
+.board-page {
+  min-height: 100vh;
+  padding: 48px 32px;
+  background: #f8fafc;
+  color: #172033;
+}
+
+.board-header {
+  max-width: 1400px;
+  margin: 0 auto 36px;
+}
+
+.board-header h1 {
+  font-size: 36px;
+  font-weight: 750;
+  letter-spacing: -1px;
+}
+
+.board-search {
+  max-width: 1400px;
+  margin: 0 auto 24px;
+}
+
+.board-search label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.board-search input {
+  width: 100%;
+  max-width: 450px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: none;
+  background: #f1f5f9;
+  color: #172033;
+}
+
+.board-search input:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.add-task-form {
+  margin-bottom: 18px;
+}
+
+.add-task-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.add-task-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-task-controls input,
+.add-task-controls button {
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.add-task-controls input {
+  min-width: 0;
+  flex: 1;
+  padding: 0 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 0;
+  background: #ffffff;
+}
+
+.add-task-controls input:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.add-task-controls button {
+  padding: 0 10px;
+  border: none;
+  border-radius: 0;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-task-controls button:hover {
+  background: #2563eb;
+}
+
+.add-task-controls button:focus-visible {
+  outline: 2px solid #172033;
+  outline-offset: 2px;
+}
+
+.board-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.board-column {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #e2e8f0;
+  background: #f1f5f9;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.column-header h2 {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.task-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task-card {
+  padding: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgb(15 23 42 / 3%);
+}
+
+.task-card h3 {
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.task-description {
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.task-due-date {
+  margin-top: 14px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.empty-column {
+  padding: 24px 12px;
+  color: #94a3b8;
+  font-size: 13px;
+  text-align: center;
+}
+
+.loading-message {
+  padding: 100px 20px;
+  color: #64748b;
+  text-align: center;
+}
+
+.error-message {
+  padding: 20px;
+  color: #dc2626;
+  text-align: center;
+}
+
+.form-error {
+  margin-top: 6px;
+  color: #dc2626;
+  font-size: 12px;
+}
+
+.add-task-controls button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 767px) {
+  .board-page {
+    padding: 28px 16px;
+  }
+
+  .board-header {
+    margin-bottom: 24px;
+  }
+
+  .board-header h1 {
+    font-size: 28px;
+  }
+
+  .board-columns {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .board-search {
+    margin-bottom: 20px;
+  }
+}
