@@ -171,6 +171,12 @@ export default function Home() {
         />
       </section>
 
+      {moveError && (
+        <p className="move-error" role="alert">
+          {moveError}
+        </p>
+      )}
+
       <section className="board-columns" aria-label="Kanban board">
         {columns.map((column) => {
           const columnTasks = tasks.filter(
@@ -199,11 +205,17 @@ export default function Home() {
                       id="new-task-title"
                       placeholder="Enter task title..."
                       value={newTaskTitle}
-                      maxLength={80}
                       disabled={isCreating}
                       onChange={(e) => {
-                        setNewTaskTitle(e.target.value);
-                        setCreateError("");
+                        const value = e.target.value;
+                        setNewTaskTitle(value);
+                        if (value.trim().length > 80) {
+                          setCreateError(
+                            "Title must be 80 characters or fewer",
+                          );
+                        } else {
+                          setCreateError("");
+                        }
                       }}
                       aria-invalid={!!createError}
                       aria-describedby={
